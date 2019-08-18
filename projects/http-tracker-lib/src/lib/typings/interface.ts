@@ -1,22 +1,25 @@
+import {HttpEvent} from '@angular/common/http';
+
 export enum EHttpResponse {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
 }
 
 export interface IHttpStatus {
-  api: string;
+  url: string;
+  partialPath: string;
   verb: string;
   loading?: boolean;
   success?: boolean;
   success_message?: object;
+  body?: any;
   error?: boolean;
-  error_message?: object;
+  error_message?: string;
+  status?: number;
+  full_response?: HttpEvent<any>;
 }
 
-export interface IHttpTrackerConfig {
-  api: string;
-  verb?: string;
-
+export interface IHttpTrackerGlobalConfig {
   /*classes*/
   loaderClass?: string;
   successClass?: string;
@@ -27,5 +30,10 @@ export interface IHttpTrackerConfig {
   /*durations*/
   successClassDuration?: number;
   errorClassDuration?: number;
-  makeDisabledDuringLoadingDuration?: number;
-};
+}
+
+
+export interface IHttpTrackerLocalConfig extends IHttpTrackerGlobalConfig {
+  verb?: string;
+  partialPath: string | RegExp;
+}

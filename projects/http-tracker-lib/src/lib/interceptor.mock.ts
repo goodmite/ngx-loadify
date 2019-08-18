@@ -4,22 +4,35 @@ import {Observable, of} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {HttpTrackerLibService} from './http-tracker-lib.service';
 import {TrackerService} from './tracker.service';
+import {HelperService} from './helper.service';
+import {IHttpStatus} from './typings/interface';
 
 @Injectable()
 export class HttpMockRequestInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {
-  }
-
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    const api = request.url;
-    TrackerService.httpAction$.emit({api, loading: true, verb: request.method});
-    return next.handle(request).pipe(tap((x) => {
-      if (x instanceof HttpResponse) {
-        TrackerService.httpAction$.emit({api, success: true, verb: request.method});
+    const url = request.url;
+    const path = HelperService.getPathFromUrl(request.url);
+    let statusObj: IHttpStatus = {partialPath: path, url, loading: true, verb: request.method};
+    TrackerService.httpAction$.emit(statusObj);
+    return next.handle(request).pipe(tap((httpResult: HttpEvent<any>) => {
+      statusObj = {
+        ...statusObj,
+        loading: false,
+        full_response: httpResult
+      };
+      if (httpResult instanceof HttpResponse) {
+        TrackerService.httpAction$.emit({...statusObj,
+          success: true,
+          body: httpResult.body
+        });
       }
-      if (x instanceof HttpErrorResponse) {
-        TrackerService.httpAction$.emit({api, error: true, verb: request.method});
+      if (httpResult instanceof HttpErrorResponse) {
+        TrackerService.httpAction$.emit({
+          ...statusObj,
+          error: true,
+          status: httpResult.status,
+          error_message: httpResult.message,
+        });
       }
     }));
   }
