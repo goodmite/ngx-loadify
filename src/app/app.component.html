@@ -1,5 +1,5 @@
 <button
-  *httpTracker="'todos'; let statusChanged$=statusChanged$"
+  *loadify="'todos'; let statusChanged$=statusChanged$"
   (click)="makeHttpReq('todos', 'get')">
   Get Todos
   <div *ngIf="(statusChanged$|async)?.loading">

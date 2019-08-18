@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ServerService} from './server.service';
 import {HttpClient} from '@angular/common/http';
-import {IHttpTrackerLocalConfig} from '../../projects/http-tracker-lib/src/lib/typings/interface';
+import {ILoadifyLocalConfig} from '../../projects/http-tracker-lib/src/lib/typings/interface';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
     private httpClient: HttpClient) {
   }
 
-  config: IHttpTrackerLocalConfig = {
+  config: ILoadifyLocalConfig = {
     partialPath: 'todos',
     verb: 'get',
     loaderClass: 'loading',
