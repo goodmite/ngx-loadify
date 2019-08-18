@@ -1,0 +1,127 @@
+/*
+All credits to: https://codepen.io/governorfancypants/pen/penmj
+I have only done minor css mods
+*/
+
+/* Colors */
+
+$color-primary              : #fff;
+$color-secondary            : #454545;
+$color-tertiary             : #E7483B;
+
+$color-complement           : #4183c4;
+
+$color-text                 : $color-secondary;
+$color-text-secondary       : $color-primary;
+
+$color-neutral              : #dfdfdf;
+$color-neutral-light        : lighten($color-neutral, 7);
+$color-approve              : #4FA86B;
+$color-reject               : $color-tertiary;
+
+$button-bg-color-std        : $color-complement;
+$button-bg-color-approve    : $color-approve;
+$button-bg-color-reject     : $color-reject;
+$button-bg-color-cancel     : #dfdfdf;
+
+/* Border radius */
+
+$border-radius-small    : 2px;
+$border-radius-medium	: 5px;
+$border-radius-large	: 10px;
+
+@mixin httpTrackerBtn {
+  position: relative;
+  border: none;
+  outline: 0;
+  min-width: 82px;
+  padding: 0 10px;
+  height: 34px;
+  display: inline-block;
+  border-radius: $border-radius-small;
+  font-size: 13px;
+  background-color: $button-bg-color-std;
+  color: $color-text-secondary;
+  cursor: pointer;
+  &:hover, &.loading {
+    border-bottom-color: darken($button-bg-color-std, 15%);
+    background-color: lighten($button-bg-color-std, 5%);
+  }
+  &:active {
+    background-color: darken($button-bg-color-std, 5%);
+    border-top-color: darken($button-bg-color-std, 15%);
+    border-bottom-color: transparent;
+  }
+}
+
+
+
+
+@mixin center-absolute{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+button {
+  @include httpTrackerBtn();
+  position: relative;
+
+  &.success, &.loading{
+    color: transparent !important;
+    &:after{
+      color: white !important;
+    }
+  }
+
+  &.loading:after {
+    @include center-absolute();
+    content: " ";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: loading 1.2s linear infinite;
+  }
+
+  &.success{
+    display:inline-block;
+    position: relative;
+    background-color: $color-approve !important;
+    &:after{
+      @include center-absolute();
+      content: '';
+      display: block;
+      width: 5px;
+      height: 15px;
+      border: solid white;
+      border-width: 0 4px 4px 0;
+      animation: checkAnimation 500ms forwards;
+    }
+  }
+
+  /*animations*/
+
+  @keyframes checkAnimation {
+    from{
+      opacity: 0;
+      transform: translate3d(-50%, -60%, 0) rotate(40deg) scale(0);
+    }
+    to{
+      opacity: 1;
+      transform: translate3d(-50%, -60%, 0) rotate(45deg) scale(1);
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg) ;
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg) ;
+    }
+  }
+
+}

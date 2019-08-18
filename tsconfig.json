@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "http-tracker-lib": [
+        "dist/http-tracker-lib"
+      ],
+      "http-tracker-lib/*": [
+        "dist/http-tracker-lib/*"
+      ]
+    }
   }
 }

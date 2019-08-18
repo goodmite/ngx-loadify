@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "http-tracker-lib": {
+      "root": "projects/http-tracker-lib",
+      "sourceRoot": "projects/http-tracker-lib/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/http-tracker-lib/tsconfig.lib.json",
+            "project": "projects/http-tracker-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/http-tracker-lib/src/test.ts",
+            "tsConfig": "projects/http-tracker-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/http-tracker-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/http-tracker-lib/tsconfig.lib.json",
+              "projects/http-tracker-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "http-tracker"
