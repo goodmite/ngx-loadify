@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IHttpTrackerLocalConfig} from './typings/interface';
+import {ILoadifyLocalConfig} from './typings/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class ErrorService {
   constructor() {
   }
 
-  static checkIfConfigIsValid(config: IHttpTrackerLocalConfig) {
+  static checkIfConfigIsValid(config: ILoadifyLocalConfig) {
     let strigifiedConfig;
     if (typeof config === 'object') {
       strigifiedConfig = JSON.stringify(config);

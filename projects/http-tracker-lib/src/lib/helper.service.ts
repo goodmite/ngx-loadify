@@ -1,4 +1,4 @@
-import {IHttpStatus, IHttpTrackerLocalConfig} from './typings/interface';
+import {ILoadifyStatus, ILoadifyLocalConfig} from './typings/interface';
 
 export class HelperService {
 
@@ -7,7 +7,7 @@ export class HelperService {
    * @param configObj: configuration object provided by the user from the directive
    * @param httpStatus: details of the ajax call
    * */
-  static doesApiMatch(configObj: IHttpTrackerLocalConfig, httpStatus: IHttpStatus) {
+  static doesApiMatch(configObj: ILoadifyLocalConfig, httpStatus: ILoadifyStatus) {
     if (this.checkIfPartialPathsMatch(configObj, httpStatus)) {
 
       /*skip this check, if no http verb provided by user*/
@@ -24,7 +24,7 @@ export class HelperService {
    * @param configObj: configuration object provided by the user from the directive
    * @param httpStatus: details of the ajax call
    * */
-  static checkIfPartialPathsMatch(configObj: IHttpTrackerLocalConfig, httpStatus: IHttpStatus) {
+  static checkIfPartialPathsMatch(configObj: ILoadifyLocalConfig, httpStatus: ILoadifyStatus) {
     const config_partialPath = configObj.partialPath;
     const http_partialPath = httpStatus.partialPath;
 
@@ -49,7 +49,7 @@ export class HelperService {
    * @param configObj: configuration object provided by the user from the directive
    * @param httpStatus: details of the ajax call
    * */
-  static checkIfHttpMethodsMatch(configObj: IHttpTrackerLocalConfig, httpStatus: IHttpStatus) {
+  static checkIfHttpMethodsMatch(configObj: ILoadifyLocalConfig, httpStatus: ILoadifyStatus) {
     const config_method: string = configObj.verb;
     const http_method: string = httpStatus.verb;
     return config_method && http_method && config_method.toLocaleLowerCase() === http_method.toLocaleLowerCase();

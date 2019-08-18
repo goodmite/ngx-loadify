@@ -3,7 +3,7 @@ import {HttpTrackerLibComponent} from './http-tracker-lib.component';
 import {HttpMockRequestInterceptor} from './interceptor.mock';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpTrackerDirective} from './http-tracker.directive';
-import {IHttpTrackerLocalConfig, IHttpTrackerGlobalConfig} from './typings/interface';
+import {ILoadifyLocalConfig, ILoadifyGlobalConfig} from './typings/interface';
 import {ConfigService} from './config.service';
 
 @NgModule({
@@ -19,8 +19,8 @@ import {ConfigService} from './config.service';
 export class HttpTrackerLibModule {
   constructor() {
   }
-  static forRoot(config: IHttpTrackerGlobalConfig): ModuleWithProviders {
-    ConfigService.config = config as IHttpTrackerLocalConfig;
+  static forRoot(config: ILoadifyGlobalConfig): ModuleWithProviders {
+    ConfigService.config = config as ILoadifyLocalConfig;
     return {
       ngModule: HttpTrackerLibModule
     };

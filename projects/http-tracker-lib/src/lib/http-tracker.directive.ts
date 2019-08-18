@@ -1,6 +1,6 @@
 import {Directive, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, TemplateRef, ViewContainerRef} from '@angular/core';
 import {TrackerService} from './tracker.service';
-import {EHttpResponse, IHttpStatus, IHttpTrackerLocalConfig} from './typings/interface';
+import {ELoadifyResponse, ILoadifyStatus, ILoadifyLocalConfig} from './typings/interface';
 import {HelperService} from './helper.service';
 import {DomService} from './dom.service';
 import {ConfigService} from './config.service';
@@ -8,7 +8,7 @@ import {ErrorService} from './error.service';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: '[httpTracker]'
+  selector: '[loadify]'
 })
 export class HttpTrackerDirective implements OnInit {
 
@@ -21,7 +21,7 @@ export class HttpTrackerDirective implements OnInit {
    * config: the config provided by the user. This configuration object is superset of
    * global config provided to root module while instantiating the library
    * */
-  config: IHttpTrackerLocalConfig;
+  config: ILoadifyLocalConfig;
 
   /**
    * httpTracker acts as interface between user and lib and used as follows:
@@ -29,9 +29,9 @@ export class HttpTrackerDirective implements OnInit {
    * In this way user will provide the local config object. Upon getting the local config object
    * we will merge it with global config object unless user has provided: {avoidGlobalConfig: true}
    * */
-  @Input('httpTracker') set _config(val: IHttpTrackerLocalConfig | string) {
+  @Input('loadify') set _config(val: ILoadifyLocalConfig | string) {
     debugger;
-    let config: IHttpTrackerLocalConfig;
+    let config: ILoadifyLocalConfig;
     if (typeof val === 'string') {
       config = {
         partialPath: val
@@ -52,7 +52,7 @@ export class HttpTrackerDirective implements OnInit {
    * 1. <button *httpTracker="config; let statusChanged$=statusChanged$"> My button {{(statusChanged$|async).loading}}</button>
    * 2. <button *httpTracker="config;" (statusChanged$)="statusChangedHandler($event)"> My button}}</button>
    * */
-  @Output() statusChanged$ = new EventEmitter<IHttpStatus>();
+  @Output() statusChanged$ = new EventEmitter<ILoadifyStatus>();
 
   constructor(private el: ElementRef,
               private renderer: Renderer2,
@@ -68,7 +68,7 @@ export class HttpTrackerDirective implements OnInit {
     const viewRef = this.vcr.createEmbeddedView(this.tpl, context);
     this.nativeElement = viewRef.rootNodes[0];
 
-    TrackerService.httpAction$.subscribe((httpStatus: IHttpStatus) => {
+    TrackerService.httpAction$.subscribe((httpStatus: ILoadifyStatus) => {
       this.httpStatusChangedHandler(httpStatus);
     });
   }
@@ -77,7 +77,7 @@ export class HttpTrackerDirective implements OnInit {
    *httpStatusChangedHandler: This method is called whenever any API status changed to loading or success or error
    *@param httpStatus: details of the api called made by user and its status
    * */
-  httpStatusChangedHandler(httpStatus: IHttpStatus) {
+  httpStatusChangedHandler(httpStatus: ILoadifyStatus) {
     if (HelperService.doesApiMatch(this.config, httpStatus)) {
       this.statusChanged$.emit(httpStatus);
       if (httpStatus.loading) {
@@ -90,10 +90,10 @@ export class HttpTrackerDirective implements OnInit {
           this.domService.toggleDisable(this.nativeElement, false);
         }
         if (httpStatus.success) {
-          this.removeLoader(EHttpResponse.SUCCESS);
+          this.removeLoader(ELoadifyResponse.SUCCESS);
         }
         if (httpStatus.error) {
-          this.removeLoader(EHttpResponse.ERROR);
+          this.removeLoader(ELoadifyResponse.ERROR);
         }
       }
     }
@@ -111,16 +111,16 @@ export class HttpTrackerDirective implements OnInit {
    * remove the loader of the host element
    * @param status: details of the api called made by user and its status
    * */
-  removeLoader(status: EHttpResponse) {
+  removeLoader(status: ELoadifyResponse) {
     let timeoutDuration = 2000;
     let appendClass: string;
     this.domService.removeClass(this.nativeElement, this.config.loaderClass);
 
-    if (status === EHttpResponse.SUCCESS) {
+    if (status === ELoadifyResponse.SUCCESS) {
       appendClass = this.config.successClass;
       timeoutDuration = this.config.successClassDuration;
     }
-    if (status === EHttpResponse.ERROR) {
+    if (status === ELoadifyResponse.ERROR) {
       appendClass = this.config.loaderClass;
       timeoutDuration = this.config.errorClassDuration;
     }

@@ -1,11 +1,11 @@
 import {HttpEvent} from '@angular/common/http';
 
-export enum EHttpResponse {
+export enum ELoadifyResponse {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
 }
 
-export interface IHttpStatus {
+export interface ILoadifyStatus {
   url: string;
   partialPath: string;
   verb: string;
@@ -19,7 +19,7 @@ export interface IHttpStatus {
   full_response?: HttpEvent<any>;
 }
 
-export interface IHttpTrackerGlobalConfig {
+export interface ILoadifyGlobalConfig {
   /*classes*/
   loaderClass?: string;
   successClass?: string;
@@ -33,7 +33,7 @@ export interface IHttpTrackerGlobalConfig {
 }
 
 
-export interface IHttpTrackerLocalConfig extends IHttpTrackerGlobalConfig {
+export interface ILoadifyLocalConfig extends ILoadifyGlobalConfig {
   verb?: string;
   partialPath: string | RegExp;
 }

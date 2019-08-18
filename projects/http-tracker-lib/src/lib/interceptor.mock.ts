@@ -5,14 +5,14 @@ import {tap} from 'rxjs/operators';
 import {HttpTrackerLibService} from './http-tracker-lib.service';
 import {TrackerService} from './tracker.service';
 import {HelperService} from './helper.service';
-import {IHttpStatus} from './typings/interface';
+import {ILoadifyStatus} from './typings/interface';
 
 @Injectable()
 export class HttpMockRequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = request.url;
     const path = HelperService.getPathFromUrl(request.url);
-    let statusObj: IHttpStatus = {partialPath: path, url, loading: true, verb: request.method};
+    let statusObj: ILoadifyStatus = {partialPath: path, url, loading: true, verb: request.method};
     TrackerService.httpAction$.emit(statusObj);
     return next.handle(request).pipe(tap((httpResult: HttpEvent<any>) => {
       statusObj = {
