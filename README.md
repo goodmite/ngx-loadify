@@ -1,3 +1,5 @@
+![alt text](https://github.com/goodmite/ngx-loadify/blob/master/screenshot.svg)
+
 # HttpTracker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
