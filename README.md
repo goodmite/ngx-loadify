@@ -1,4 +1,4 @@
-![alt text](https://github.com/goodmite/ngx-loadify/blob/master/screenshot.svg)
+![alt text](https://github.com/goodmite/ngx-loadify/blob/master/screenshot1.svg)
 
 # HttpTracker
 
