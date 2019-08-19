@@ -10,7 +10,7 @@ import {ILoadifyLocalConfig} from '../../projects/http-tracker-lib/src/lib/typin
 export class AppComponent {
   title = 'http-tracker';
   className = true;
-  data;
+  data;;
 
   constructor(
     private httpClient: HttpClient) {
