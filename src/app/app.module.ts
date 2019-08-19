@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ServerService} from './server.service';
-import {HttpTrackerLibModule} from '../../projects/http-tracker-lib/src/lib/http-tracker-lib.module';
+import {HttpTrackerLibModule} from 'ngx-loadify';
 
 @NgModule({
   declarations: [
