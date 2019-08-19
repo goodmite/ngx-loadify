@@ -14,7 +14,7 @@ Managing loaders sucks. It might seem simple at first but its really an elaborat
  
  All of this doesn't kill you, but it make you unproductive and unnecessarily clutters the main business logic.
  
- With ngx-loadify it becomes as simple as this:
+ **With ngx-loadify it becomes as simple as this:**
  ```
  <button
     *loadify="'todos';    //<-- tracks apis with path containing todo and automatically adds/removes loading/success/error classes
