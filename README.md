@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/goodmite/ngx-loadify/master/carbon1.png" width="600" height="346.5">
+<img src="https://raw.githubusercontent.com/goodmite/ngx-loadify/master/carbon1.png">
 
 # ngx-loadify
 
