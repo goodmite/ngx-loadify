@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ServerService} from './server.service';
 import {HttpClient} from '@angular/common/http';
 import {ILoadifyLocalConfig} from '../../projects/http-tracker-lib/src/lib/typings/interface';
 

@@ -1,10 +1,5 @@
 <button
-  *loadify="'todos'; let statusChanged$=statusChanged$"
-  (click)="makeHttpReq('todos', 'get')">
-  Get Todos
-  <div *ngIf="(statusChanged$|async)?.loading">
-    loading
-  </div>
+  *loadify="'todos'; let statusChanged$=statusChanged$" (click)="getTodos('todos', 'get')">Get Todos
 </button>
 <!--<button libHttpTracker [config]="{api: 'todos', verb:'post'}" (click)="makeHtttpReq('todos', 'post', '')">Update todo 1</button>-->
 <!--<button libHttpTracker [config]="{api: 'todos', verb:'delete'}" (click)="makeHtttpReq('todos', 'delete')">Delete todo 1</button>-->

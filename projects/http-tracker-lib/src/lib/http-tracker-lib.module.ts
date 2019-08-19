@@ -1,10 +1,10 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {InjectionToken, ModuleWithProviders, NgModule} from '@angular/core';
 import {HttpTrackerLibComponent} from './http-tracker-lib.component';
 import {HttpMockRequestInterceptor} from './interceptor.mock';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpTrackerDirective} from './http-tracker.directive';
-import {ILoadifyLocalConfig, ILoadifyGlobalConfig} from './typings/interface';
-import {ConfigService} from './config.service';
+import {ILoadifyGlobalConfig} from './typings/interface';
+import {USER_OPTIONS} from './config.service';
 
 @NgModule({
   declarations: [HttpTrackerLibComponent, HttpTrackerDirective],
@@ -19,10 +19,15 @@ import {ConfigService} from './config.service';
 export class HttpTrackerLibModule {
   constructor() {
   }
+
   static forRoot(config: ILoadifyGlobalConfig): ModuleWithProviders {
-    ConfigService.config = config as ILoadifyLocalConfig;
+
     return {
-      ngModule: HttpTrackerLibModule
+      ngModule: HttpTrackerLibModule,
+      providers: [{
+        provide: USER_OPTIONS,
+        useValue: config
+      }],
     };
   }
 }

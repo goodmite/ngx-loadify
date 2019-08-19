@@ -19,7 +19,7 @@
       "dom"
     ],
     "paths": {
-      "http-tracker-lib": [
+      "ngx-loadify": [
         "dist/http-tracker-lib"
       ],
       "http-tracker-lib/*": [

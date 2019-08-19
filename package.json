@@ -7,7 +7,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod --base-href \"ngx-loadify\" && angular-cli-ghpages --dir=\"dist/http-tracker\"",
+    "build-lib": "ng build ngx-loadify",
+    "release": "node change-lib-name.js && npm run build-lib && cd dist/http-tracker-lib && npm publish --access=public",
+    "git": "git add . && git commit",
+    "postgit": "git push"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
     "core-js": "^2.5.4",
+    "ngx-loadify": "0.0.11",
     "node-sass": "^4.12.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
