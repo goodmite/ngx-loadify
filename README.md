@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/goodmite/ngx-loadify/master/carbon.png?raw=true)
+<img src="https://raw.githubusercontent.com/goodmite/ngx-loadify/master/carbon.png" width="600" height="346.5">
 
 # HttpTracker
 
