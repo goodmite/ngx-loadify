@@ -2,6 +2,8 @@
 
 # HttpTracker
 
+[![npm version](https://badge.fury.io/js/ngx-loadify.svg)](https://badge.fury.io/js/ngx-loadify)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
 ## Development server
