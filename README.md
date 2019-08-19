@@ -1,31 +1,79 @@
 <img src="https://raw.githubusercontent.com/goodmite/ngx-loadify/master/carbon.png" width="600" height="346.5">
 
-# HttpTracker
+# ngx-loadify
 
-[![npm version](https://badge.fury.io/js/ngx-loadify.svg)](https://badge.fury.io/js/ngx-loadify)
+A dead simple library to manage HTTP loading/success/error, so you won't have to.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
+## Motivation
 
-## Development server
+Managing loaders sucks. It might seem simple at first but its really an elaborate and tedius task. 
+ 1. You will have a flag to track if the Http call is done or not. 
+ 2. Another flag if its successful or errored out. 
+ 3. Another flag for http success/error message, which require a timeout after which button should reset to normalcy.
+ 4. Now do all of the above for every single API in your project!
+ 
+ All of this doesn't kill you, but it make you unproductive and unnecessarily clutters the main business logic.
+ 
+ With ngx-loadify it becomes as simple as this:
+ ```
+ <button
+    *loadify="'todos';    //<-- tracks apis with path containing todo and automatically adds/removes loading/success/error classes
+    let status$=status$"  //<-- status$ is an observable for api details. Usage ex: (status$|async).loading or (status$|async).error message
+    (click)="getTodos()">
+  Get Todos
+</button>
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+1. Install from npm
+    ```npm i ngx-loadify --save```
+2. Import in your Root Module:
+    ```
+    import {HttpTrackerLibModule} from 'ngx-loadify';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    @NgModule({
+      ...
+      imports: [
+        HttpTrackerLibModule.forRoot({
+          loaderClass: 'loading',
+          errorClass: 'error',
+          successClass: 'success',
+          makeDisabledDuringLoading: true,
+          successClassDuration: 2000,
+          errorClassDuration: 2000,
+        })
+      ],
+      ...
+    })
+    export class AppModule { }
+    ```
+**3. Add the directive to your code**
 
-## Build
+  *Basic:*
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    ```
+    //app.component.html
+    <button *loadify="'todos'; let status$=status$"  (click)="getTodos()">
+      Get Todos
+    </button>
+    ```
 
-## Running unit tests
+  *With config:*
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    ```
+    //app.component.html
 
-## Running end-to-end tests
+    <button
+      *loadify="{ partialPath: 'todos', verb: 'POST',}; let statusChanged$=statusChanged$"
+      (click)="makeHttpReq('todos', 'get')">
+      Get Todos
+    </button>
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Examples:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### 1. Basic 
+### 2. Bootstrap 
+### 3. Angular material 
