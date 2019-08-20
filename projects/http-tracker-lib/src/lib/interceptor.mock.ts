@@ -6,7 +6,6 @@ import {HttpTrackerLibService} from './http-tracker-lib.service';
 import {TrackerService} from './tracker.service';
 import {HelperService} from './helper.service';
 import {ILoadifyStatus} from './typings/interface';
-
 @Injectable()
 export class HttpMockRequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

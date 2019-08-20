@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {ServerService} from './server.service';
 import {HttpClient} from '@angular/common/http';
-import {IHttpTrackerLocalConfig} from '../../projects/http-tracker-lib/src/lib/typings/interface';
+import {ILoadifyLocalConfig} from '../../projects/http-tracker-lib/src/lib/typings/interface';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +11,23 @@ export class AppComponent {
   title = 'http-tracker';
   className = true;
   data;
+;
+
+  code = `
+    //api : http://www.mocky.io/v2/5d5ac0062f00006e0036f88d
+    
+    <button
+      *loadify="'v2/5d5ac0062f00006e0036f88d'; let statusChanged$=statusChanged$"
+      (click)="makeHttpReq()">
+      Get Todo: {{(statusChanged$|async)?.body?.title}}     <--- You can access entire Http Response like this
+    </button>
+  `;
 
   constructor(
     private httpClient: HttpClient) {
   }
 
-  config: IHttpTrackerLocalConfig = {
+  config: ILoadifyLocalConfig = {
     partialPath: 'todos',
     verb: 'get',
     loaderClass: 'loading',
@@ -29,14 +39,15 @@ export class AppComponent {
   };
 
 
-  makeHttpReq(path, verb, id = '1') {
-    let url = `https://jsonplaceholder.typicode.com/${path}/${id}`;
-    return this.httpClient[verb](url)
+  makeHttpReq() {
+    const url = `https://www.mocky.io/v2/5d5ac0062f00006e0036f88d?mocky-delay=3000ms`;
+    return this.httpClient.get(url)
       .subscribe((data) => {
         this.data = data;
       });
   }
-  test(message){
+
+  test(message) {
     alert(message);
   }
 }

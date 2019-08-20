@@ -41,7 +41,7 @@ export class HttpTrackerDirective implements OnInit {
     }
 
     this.config = {
-      ...(ConfigService.config || {}),
+      ...(this.configService.config || {}),
       ...config,
     };
   }
@@ -58,6 +58,7 @@ export class HttpTrackerDirective implements OnInit {
               private renderer: Renderer2,
               private tpl: TemplateRef<any>,
               private vcr: ViewContainerRef,
+              private configService: ConfigService,
               private domService: DomService) {
   }
 

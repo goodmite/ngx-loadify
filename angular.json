@@ -134,7 +134,7 @@
         }
       }
     },
-    "http-tracker-lib": {
+    "ngx-loadify": {
       "root": "projects/http-tracker-lib",
       "sourceRoot": "projects/http-tracker-lib/src",
       "projectType": "library",

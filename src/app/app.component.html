@@ -1,15 +1,19 @@
-<button
-  *httpTracker="'todos'; let statusChanged$=statusChanged$"
-  (click)="makeHttpReq('todos', 'get')">
-  Get Todos
-  <div *ngIf="(statusChanged$|async)?.loading">
-    loading
-  </div>
-</button>
-<!--<button libHttpTracker [config]="{api: 'todos', verb:'post'}" (click)="makeHtttpReq('todos', 'post', '')">Update todo 1</button>-->
-<!--<button libHttpTracker [config]="{api: 'todos', verb:'delete'}" (click)="makeHtttpReq('todos', 'delete')">Delete todo 1</button>-->
-<!---->
-<!--<button libHttpTracker [config]="{api: 'comments', verb:'get'}" (click)="makeHtttpReq('comments', 'get')">Get comment 1</button>-->
-<!--<button libHttpTracker [config]="{api: 'comments', verb:'post'}" (click)="makeHtttpReq('comments', 'post', '')">Update comment 1</button>-->
-<!--<button libHttpTracker [config]="{api: 'comments', verb:'delete'}" (click)="makeHtttpReq('comments', 'delete')">Delete comment 1</button>-->
+<div style="display: flex; justify-content: center; flex-direction: column; align-items: center">
+  <header class="header">
+    <h1>ngx-loadify</h1>
+    <p class="description">
+      A dead simple library to manage HTTP loading/success/error, so you won't have to
+    </p>
+  </header>
 
+  <button
+    *loadify="'v2/5d5ac0062f00006e0036f88d'; let statusChanged$=statusChanged$"
+    class="my-button"
+    (click)="makeHttpReq()">
+    Get Todo
+  </button>
+
+  <div class="code-editor">
+    <pre>{{code}}</pre>
+  </div>
+</div>

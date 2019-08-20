@@ -1,19 +1,22 @@
-import {Injectable} from '@angular/core';
-import {ILoadifyLocalConfig} from './typings/interface';
+import {ILoadifyGlobalConfig, ILoadifyLocalConfig} from './typings/interface';
+import {Inject, Injectable, InjectionToken} from '@angular/core';
+
+export const USER_OPTIONS = new InjectionToken<ILoadifyGlobalConfig>('USER_OPTIONS');
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
 
-  private static  _config: ILoadifyLocalConfig;
+  constructor(@Inject(USER_OPTIONS) private _config: ILoadifyGlobalConfig) {
 
-  static get config() {
+  }
+
+  get config() {
     return this._config;
   }
 
-  static set config(val: ILoadifyLocalConfig) {
+  set config(val: ILoadifyGlobalConfig) {
     this._config = val;
   }
-  constructor() {}
 }
